@@ -67,6 +67,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("reset", new ReturnToBasic(m_arm, m_shooter, m_intake, m_feeder));
         NamedCommands.registerCommand("ampDrop", new AmpDrop(m_arm, m_intake, m_shooter, m_feeder));
         NamedCommands.registerCommand("autoShoot", new AutoShoot(m_shooter, m_swerve, m_light, m_feeder, m_arm, m_intake));
+        NamedCommands.registerCommand("autoIntake", new AutoAdjustIntake(m_feeder, m_intake, m_arm, m_shooter, m_light, m_swerve));
 
         // Configure the button bindings
         configureButtonBindings();
@@ -113,8 +114,8 @@ public class RobotContainer {
         new JoystickButton(m_operator, 24).onTrue(new SetFeederSpeed(10, m_feeder).alongWith(new SetShooterSpeed(10, m_shooter))).onFalse(new SetFeederSpeed(0, m_feeder).alongWith(new SetShooterSpeed(0, m_shooter)));
 
         // Misc. Commands
-        new JoystickButton(m_operator, 5).onTrue(new ReturnToBasic(m_arm, m_shooter, m_intake, m_feeder));
-        new JoystickButton(m_operator, 21).onTrue(new SetShooterSpeed(0, m_shooter));
+        new JoystickButton(m_operator, 5).onTrue(new AutoAdjustIntake(m_feeder, m_intake, m_arm, m_shooter, m_light, m_swerve)).onFalse(new ReturnToBasic(m_arm, m_shooter, m_intake, m_feeder));
+        new JoystickButton(m_operator, 3).onFalse(new ReturnToBasic(m_arm, m_shooter, m_intake, m_feeder));
     }
 
     /**

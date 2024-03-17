@@ -4,8 +4,6 @@
 
 package frc.robot.commands.Combo;
 
-import edu.wpi.first.wpilibj.PS5Controller;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.Feeder.SetFeederSpeed;
@@ -14,17 +12,24 @@ import frc.robot.commands.Feeder.WaitForNote;
 import frc.robot.commands.Intake.IdleOuttake;
 import frc.robot.commands.Intake.SimpleIntake;
 import frc.robot.commands.Intake.StopIntake;
+import frc.robot.commands.Swerve.PIDTranslation;
+import frc.robot.commands.Swerve.PIDTurning;
+import frc.robot.commands.Swerve.PIDTurningIntake;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Swerve;
 
-public class AutoIntake extends SequentialCommandGroup {
+public class AutoAdjustIntake extends SequentialCommandGroup {
   /** Creates a new AutoIntake. */
-  public AutoIntake(Feeder feeder, Intake intake, Arm arm, Shooter shooter) {
+  public AutoAdjustIntake(Feeder feeder, Intake intake, Arm arm, Shooter shooter, Limelight light, Swerve swerve) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+      new PIDTurningIntake(swerve, light),
+      new PIDTranslation(swerve, light),
       new ParallelDeadlineGroup(
         new WaitForNote(feeder), 
         new SimpleIntake(intake),
