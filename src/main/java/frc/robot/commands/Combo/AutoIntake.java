@@ -4,10 +4,9 @@
 
 package frc.robot.commands.Combo;
 
-import edu.wpi.first.wpilibj.PS5Controller;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.Blinkin.BlinkLimelight;
 import frc.robot.commands.Feeder.SetFeederSpeed;
 import frc.robot.commands.Feeder.WaitForNoNote;
 import frc.robot.commands.Feeder.WaitForNote;
@@ -17,11 +16,12 @@ import frc.robot.commands.Intake.StopIntake;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 
 public class AutoIntake extends SequentialCommandGroup {
   /** Creates a new AutoIntake. */
-  public AutoIntake(Feeder feeder, Intake intake, Arm arm, Shooter shooter) {
+  public AutoIntake(Feeder feeder, Intake intake, Arm arm, Shooter shooter, Limelight light) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
@@ -36,7 +36,8 @@ public class AutoIntake extends SequentialCommandGroup {
         new IdleOuttake(intake)
       ),
       new StopIntake(intake),
-      new SetFeederSpeed(0, feeder)
+      new SetFeederSpeed(0, feeder),
+      new BlinkLimelight(light)
     );
   }
 }

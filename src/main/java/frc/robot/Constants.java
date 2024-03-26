@@ -47,7 +47,7 @@ public final class Constants {
         public static final double kSpeakerMidAngle = 50;
         public static final double kSpeakerFarAngle = 58.75;
         public static final double kArmHomeAngle = 0;
-        public static final double kYeetAngle = 50; //TODO: Tune this number at Mason
+        public static final double kYeetAngle = 35; //TODO: Tune this number at Mason
     }
 
     public final class IntakeConstants {
@@ -59,8 +59,8 @@ public final class Constants {
     }
 
     public static final class LimelightConstants {
-        public static final double kMountAngleRadians = Units.degreesToRadians(24);
-        public static final double kLimelightLensHeightMeters = Units.inchesToMeters(15.75);
+        public static final double kMountAngleRadians = Units.degreesToRadians(30);
+        public static final double kLimelightLensHeightMeters = Units.inchesToMeters(13.75);
         public static final double kGoalHeightMeters = Units.inchesToMeters(53.875);
     }
 
